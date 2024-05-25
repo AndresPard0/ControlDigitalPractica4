@@ -6,6 +6,5 @@ BotonesComoEntradaPullUp(){
     pinMode(boton2, INPUT_PULLUP);
     pinMode(boton3, INPUT_PULLUP);
     pinMode(boton4, INPUT_PULLUP);
-    
  };
 
