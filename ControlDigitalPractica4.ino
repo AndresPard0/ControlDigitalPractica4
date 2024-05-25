@@ -13,11 +13,11 @@ const gpioMap_t led4 = 13;
 
 const gpioMap_t secuencia[] = {led1, led2, led3, led4};
 const uint8_t ultimoLed = sizeof(secuencia)/sizeof(gpioMap_t);
-bool botones[4] = {true, true, true, true};
+bool botones[4] = {false, true, true, false};
 
 void setup () {
   //Encender los leds
-  Serial.begin(9600);
+  Serial.begin(115200);
   for (int i = 0; i<ultimoLed; i++){
     pinMode(secuencia[i], OUTPUT);
   }
@@ -32,13 +32,22 @@ void loop (){
   static int interval = 750;
   //Tiempos para determinar cuando apagar y prender los leds
   static unsigned long previusMillis = 0;
+  static unsigned long tiempoBoton = 0;
   unsigned long currentMillis = millis();  
+  
+  LeerBotones(botones);
+  Serial.print(botones[0]);
+  Serial.print(botones[1]);
+  Serial.print(botones[2]);
+  Serial.print(botones[3]);
+  Serial.println();
 
    if (currentMillis - previusMillis >= interval) {
     //Apagar los leds
     ApagarLeds(secuencia, ultimoLed);
     //Contador para controlar el sentido de la secuencia
-    contador = (contador +1 ) % ultimoLed;
+    SentidoDeSecuencia(botones, &contador, ultimoLed);
+    VelocidadDeSecuencia(botones, &interval);
     EncenderLed(secuencia[contador]);
     // Guarda el tiempo actual como referencia para el próximo cambio de estado
     previusMillis = currentMillis;
