@@ -57,9 +57,9 @@ void SentidoDeSecuencia(bool *botones, int *contador, uint8_t ultimoLed){
 //Se cambia el intervalo para el cual funciona la secuencia
 void VelocidadDeSecuencia(bool *botones, int *interval){
     if (botones[2]){
-        *interval = 200;
-    }else{
         *interval = 750;
+    }else{
+        *interval = 200;
     }
 }
 

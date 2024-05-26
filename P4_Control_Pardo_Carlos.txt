@@ -1,0 +1,3 @@
+Alumno: Carlos Andres Pardo Castro
+Práctica 4:
+https://github.com/AndresPard0/ControlDigitalPractica4
